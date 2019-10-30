@@ -28,6 +28,7 @@ do
     echo "File uploaded at $(expr $Throughput_in_Mbps*$((1000000)) | bc -l) Mbps speed."
     # Delete file from s3
     aws s3 rm s3://$BUCKETNAME/$PREFIX/$FILENAME --region $REGION --profile $AWS_PROFILE
+    i=$(( i-1 ))
 done
 
 rm $FILENAME
