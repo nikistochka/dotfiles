@@ -10,6 +10,7 @@ REGION=eu-west-1
 PREFIX=folder/folder
 FILENAME=temp_speed_file
 
+# Set filesize to transfer
 truncate -s 500M $FILENAME
 
 i=1
