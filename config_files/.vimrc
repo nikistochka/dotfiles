@@ -1,4 +1,6 @@
-set number
+" Show line numbers:
+"set number
+
 filetype plugin indent on
 syntax on
 " An example for a vimrc file.
