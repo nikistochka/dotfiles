@@ -1,13 +1,14 @@
 #!/bin/bash
-#
-#First run script for Ubuntu
-
+###############################################
+# First run script for Ubuntu
+###############################################
 
 sudo apt-get -y update
 echo "Installing packages..."
 sudo apt-get -y install git htop atop iotop zsh mc tmux
 
 # Install docker
+if ! docker --version > /dev/null; then
 sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
@@ -27,10 +28,13 @@ sudo apt-get -y update
 sudo apt -y install docker-ce docker-ce-cli containerd.io
 
 sudo usermod -aG docker $USER
+fi
 
 # Install docker-compose
+if ! docker-compose --version > /dev/null; then
 sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
+fi
 
 echo "Adding alias git lgb to ~/.gitconfig"
 # Add 'git lgb'
