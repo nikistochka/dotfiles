@@ -44,6 +44,7 @@ cp config_files/.vimrc ~/.vimrc
 # Install oh-my-zsh
 echo "Installing oh-my-zsh..."
 sudo sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+cp config_files/robbyrussell.zsh-theme ~/.oh-my-zsh/custom/themes/robbyrussell.zsh-theme
 
 # Enable ohmyzsh plugins
 # by editing plugins=(git docker docker-compose)
