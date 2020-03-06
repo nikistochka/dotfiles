@@ -60,5 +60,8 @@ echo "Installing oh-my-zsh..."
 sudo sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 cp config_files/robbyrussell.zsh-theme ~/.oh-my-zsh/custom/themes/robbyrussell.zsh-theme
 
+# Add aliases to .zshrc
+echo 'alias mc="mc -b"' | tee -a ~/.zshrc
+
 # Enable oh-my-zsh plugins
 # by editing plugins=(git docker docker-compose)
