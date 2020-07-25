@@ -1,4 +1,11 @@
 #!/bin/bash
+#########################################################
+# To use this script just login to your vault and run it.
+# Example:
+# export VAULT_NAMESPACE="mynamespace"
+# export VAULT_ADDR="https://localhost:8200"
+# vault login ${VAULT_TOKEN}
+#########################################################
 
 # Add policies. Description is in each policy
 vault policy write myapp-r -<<EOF
