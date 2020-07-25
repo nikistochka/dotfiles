@@ -6,3 +6,4 @@
 
 * `test_aws_s3_upload_speed.sh` - script for testing upload speed to AWS S3 bucket;
 * `first_run_centos.sh` - script for install basic programm and settings on CentOS.
+* `vault-configuration.sh` - script for basic configuration Hashicorp Vault
