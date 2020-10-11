@@ -5,7 +5,7 @@
 
 sudo apt-get -y update
 echo "Installing packages..."
-sudo apt-get -y install git htop atop iotop zsh mc tmux
+sudo apt-get -y install git htop atop iotop zsh mc tmux jq
 
 # Install docker
 if ! docker --version > /dev/null; then
