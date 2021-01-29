@@ -59,4 +59,5 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
-
+" Disable beep sound in vim
+set visualbell

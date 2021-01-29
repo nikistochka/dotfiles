@@ -62,6 +62,7 @@ cp config_files/robbyrussell.zsh-theme ~/.oh-my-zsh/custom/themes/robbyrussell.z
 
 # Add aliases to .zshrc
 echo 'alias mc="mc -b"' | tee -a ~/.zshrc
+echo 'unsetopt beep' | tee -a ~/.zshrc
 
 # Enable oh-my-zsh plugins
 # by editing plugins=(git docker docker-compose)
