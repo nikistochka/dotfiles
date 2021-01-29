@@ -3,6 +3,11 @@
 # First run script for Ubuntu
 ###############################################
 
+get_latest_release() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" |
+    jq -r ".tag_name"
+}
+
 sudo apt-get -y update
 echo "Installing packages..."
 sudo apt-get -y install git htop atop iotop zsh mc tmux jq
@@ -46,6 +51,10 @@ else
   echo "kubectl already installed"
 fi
 
+# Install nvm
+NVM_VERSION=$(get_latest_release nvm-sh/nvm)
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash
+
 # Add alias 'git lgb'
 echo "Adding alias git lgb to ~/.gitconfig"
 git config --global alias.lgb "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches"
@@ -63,6 +72,16 @@ cp config_files/robbyrussell.zsh-theme ~/.oh-my-zsh/custom/themes/robbyrussell.z
 # Add aliases to .zshrc
 echo 'alias mc="mc -b"' | tee -a ~/.zshrc
 echo 'unsetopt beep' | tee -a ~/.zshrc
+echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' | tee -a ~/.zshrc
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' | tee -a ~/.zshrc
+
+source ~/.zshrc
+
+# Install node LTS
+nvm install --lts
+
+# Install TLDR
+npm install -g tldr
 
 # Enable oh-my-zsh plugins
 # by editing plugins=(git docker docker-compose)
