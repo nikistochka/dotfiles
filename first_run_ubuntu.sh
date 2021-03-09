@@ -69,8 +69,9 @@ echo "Installing oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 cp config_files/robbyrussell.zsh-theme ~/.oh-my-zsh/custom/themes/robbyrussell.zsh-theme
 
-# Add aliases to .zshrc
+# Changes to .zshrc
 echo 'alias mc="mc -b"' | tee -a ~/.zshrc
+echo 'alias k="kubectl"' | tee -a ~/.zshrc
 echo 'unsetopt beep' | tee -a ~/.zshrc
 echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' | tee -a ~/.zshrc
 echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' | tee -a ~/.zshrc
