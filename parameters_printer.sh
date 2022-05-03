@@ -1,38 +1,71 @@
 #!/usr/bin/env bash
 
-usage_guide(){
-    echo "parameters_printer.sh --first FIRST --second SECOND --third THIRD"
+FILE=
+VERBOSE=0
+
+function log_error_exit() {
+    printf '%s\n' "$1" >&2
+    exit 1
 }
 
-if [[ "$1" = "" ]]; then
-    usage_guide
-    exit 0
-fi
+function show_help() {
+cat << EOF 
+USAGE:
+parameters_printer.sh --file <FILEPATH> --second <SECOND> --third <THIRD>
+EOF
+}
 
-while [[ "$1" != "" ]]; do
-    case $1 in 
-        --first )
-            shift
-            FIRST=$1
-            ;;
-        --second )
-            shift
-            SECOND=$1
-            ;;
-        --third )
-            shift
-            THIRD=$1
-            ;;
-        --help | -h )
-            usage_guide
-            exit 0
-            ;;
-        * )
-            echo "Invalid parameter $1" >&2
-            usage_guide
-            exit 1
-    esac
-    shift
-done
+function read_parameters(){
+    if [[ "$1" = "" ]]; then
+        show_help
+        exit 0
+    fi
 
-echo "first parameter = ${FIRST}, second parameter = ${SECOND}, THIRD = ${THIRD}"
+    while [[ "$1" != "" ]]; do
+        case "$1" in 
+            -f|--file)
+                if [ "$2" ]; then
+                    FILE=$2
+                    shift
+                else
+                    log_error_exit 'ERROR: "--file" requires a non-empty option argument.'
+                fi
+                ;;
+            -f=?*|--file=?*)
+                file=${1#*=} # Delete everything up to "=" and assign the remainder.
+                ;;
+            -f=|--file=)         # Handle the case of an empty --file=
+                log_error_exit 'ERROR: "--file" requires a non-empty option argument.'
+                ;;
+            -v|--verbose)
+                VERBOSE=$((VERBOSE + 1))  # Each -v adds 1 to verbosity.
+                ;;
+            -s|--second)
+                SECOND=$2
+                shift
+                ;;
+            -t|--third)
+                THIRD=$2
+                shift
+                ;;
+            -h|-\?|--help)
+                show_help
+                exit
+                ;;
+            * )
+                echo "Invalid parameter $1" >&2
+                show_help
+                exit 1
+        esac
+
+        shift
+    done
+}
+
+
+function main() {
+    read_parameters "$@"
+    echo "File path = ${FILE}, second parameter = ${SECOND}, third parameter = ${THIRD}, verbosity = ${VERBOSE}"
+}
+
+main "$@"
